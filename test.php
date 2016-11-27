@@ -78,8 +78,9 @@ $res = q::delete('account')->
         exec();
 
 // Delete first row inserted
-echo "Trying to delete first row" . PHP_EOL;
-echo "Result of this should be 'true' or 1 " . PHP_EOL;
+echo "Trying to delete first row. Result: " . PHP_EOL;
+print_r($res);
+echo PHP_EOL;
 
 // Update row
 $values = array ('email' => 'test3@test.dk', 'password' => 'extra secret');
@@ -89,23 +90,52 @@ $res = q::update('account')->
         exec();
 
 // Delete first row inserted
-echo "Trying to update 2. row" . PHP_EOL;
-echo "Result of this should be 'true' or 1 " . PHP_EOL;
-var_dump($res);
+echo "Trying to update row. Result: " . PHP_EOL;
+print_r($res);
+echo PHP_EOL;
 
 // Use ransactions:
 q::begin();
-// Insert and get last insert ID
 $values = array('email' => 'test4@test.dk', 'password' => 'just a password');
 $res = q::insert('account')->values($values)->execLastInsertId();
 if (!$res) {
-    echo "Could not insert row. We roll back";
+    echo "Could not insert row. We roll back" . PHP_EOL;
     q::rollback();
 }
 
 $res = q::commit();
-
 echo "Result of commit" . PHP_EOL;
 print_r($res);
+echo PHP_EOL;
 
+// Add some custom SQL
+$rows = q::select('account')->sql('id > 0 AND id < 12')->fetch();
+echo "Results where using custom SQL: " . PHP_EOL;
+print_r($rows);
+echo PHP_EOL;
 
+// Replace - a bit different syntax
+$res = q::replace('account', array('password' => 'hello world'), array ('id =' => 3));
+
+echo "Results where using replace " . PHP_EOL;
+print_r($res);
+echo PHP_EOL;
+
+// Use multiple filters as array
+$filters = array (
+    'id >' => 1, 
+    'password =' => "hello world");
+
+$row = q::select('account')->filterArray($filters, 'AND')->fetchSingle();
+
+echo "Result when using filterArray " . PHP_EOL;
+print_r($row);
+echo PHP_EOL;
+
+// Value in
+$ids = array (1, 2, 3);
+$rows = q::select('account')->filterIn('ID in', $ids)->fetch();
+
+echo "Result when using filterIn " . PHP_EOL;
+print_r($rows);
+echo PHP_EOL;

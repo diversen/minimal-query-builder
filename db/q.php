@@ -586,11 +586,10 @@ class q extends connect {
     public static function replace ($table, $values, $search) {
         $num_rows = self::numRows($table)->filterArray($search)->fetch();
         if (!$num_rows){
-            self::insert($table)->values($values)->exec();
+            return self::insert($table)->values($values)->exec();
         } else {
-            self::update($table)->values($values)->filterArray($search)->exec();
+            return self::update($table)->values($values)->filterArray($search)->exec();
         }
-        return new self;
     }
     
     /**
