@@ -4,14 +4,9 @@ include_once "../../autoload.php";
 
 use diversen\db\q;
 
-// Using an array
-// q::connect(array('url', 'username', 'password', 'dont_die', 'db_init'));
-// E.g sqlite: 
-// q::connect(array('sqlite:test.sql'));
-// Fetch multiple rows
-// Create table messages
+// Connect example
 
-// E.g. for MySQL
+// MySQL
 /*
 $mysql_conn = array(
     'url' => $url, // mysql:dbname=gitbook;host=localhost;charset=utf8
@@ -94,7 +89,23 @@ $res = q::update('account')->
         exec();
 
 // Delete first row inserted
-echo "Trying to updat 2. row" . PHP_EOL;
+echo "Trying to update 2. row" . PHP_EOL;
 echo "Result of this should be 'true' or 1 " . PHP_EOL;
 var_dump($res);
+
+// Use ransactions:
+q::begin();
+// Insert and get last insert ID
+$values = array('email' => 'test4@test.dk', 'password' => 'just a password');
+$res = q::insert('account')->values($values)->execLastInsertId();
+if (!$res) {
+    echo "Could not insert row. We roll back";
+    q::rollback();
+}
+
+$res = q::commit();
+
+echo "Result of commit" . PHP_EOL;
+print_r($res);
+
 
