@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A simple and very basic query builder class, which should support any database supported by PDO.",
     "homepage": "http://github.com/diversen/minimal-query-builder",
-    "keywords": ["database", "sql", "query builder"],
+    "keywords": ["mariadb", "sqlite", "mysql", "postgresql", "query builder"],
     "license": "MIT",
     "authors": [
         {
