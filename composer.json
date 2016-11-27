@@ -1,0 +1,26 @@
+{
+    "name": "diversen/minimal-query-builder",
+    "type": "library",
+    "description": "A simple and very basic query builder class, which should support any database supported by PDO.",
+    "homepage": "http://github.com/diversen/minimal-query-builder",
+    "keywords": ["database", "sql", "query builder"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dennis Iversen",
+            "email": "dennis.iversen@gmail.com",
+            "homepage": "https://github.com/diversen",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "diversen\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
