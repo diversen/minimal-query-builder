@@ -41,6 +41,24 @@ class connect {
     }
     
     /**
+     * Checks params and set missing params to null
+     * @param array $options
+     * @return array $options
+     */
+    private static function setOptions ($options) {
+        if (!isset($options['username'])) {
+            $options['username'] = null;
+        }
+        if (!isset($options['password'])) {
+            $options['password'] = null;
+        }
+        if (!isset($options['db_init'])) {
+            $options['db_init'] = null;
+        }
+        return $options;
+    }
+    
+    /**
      * Connect to a database using an options array 
      * <code>array('url', 'username', 'password', 'dont_die', 'db_init')</code>
      * If the array is empty then try to read from a configuration file.
@@ -54,6 +72,7 @@ class connect {
             return false;
         }
         
+        $options = self::setOptions($options);
         self::$debug[] = "Trying to connect with " . $options['url'];
 
         // Dfault is to persist

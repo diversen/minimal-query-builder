@@ -428,8 +428,8 @@ class q extends connect {
     }
     
     /**
-     * method to execute a query, insert update or delte. 
-     * @return boolean true on success and false on failure. 
+     * Method to execute a query, insert update or delete. 
+     * @return boolean $res true on success and false on failure. 
      */
     public static function exec() {
         
