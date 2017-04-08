@@ -103,7 +103,7 @@ class connect {
         // Catch Exception
         } catch (PDOException $e) {
             if (!isset($options['dont_die'])){
-                self::fatalError ('Connection failed: ' . $e->getMessage());
+                die('Connection failed - check your database and your connection params');
             } else {
                 self::$debug[] = $e->getMessage();
                 self::$debug[] = 'No connection';
