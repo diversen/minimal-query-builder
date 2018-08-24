@@ -67,7 +67,13 @@ class connect {
      */
     public static function connect($options = []){
 
-        
+        if($options instanceof PDO) {
+            self::$dbh = $options;
+            self::$con = true;
+            self::$debug[]  = 'Connected with instance of PDO';
+            return;
+         }
+
         if (!isset($options['url'])){
             return false;
         }
@@ -111,7 +117,7 @@ class connect {
             }
         }
         self::$con = true;
-        self::$debug[]  = 'Connected!';
+        self::$debug[]  = 'Connected using array of options';
     }
     
     /**
