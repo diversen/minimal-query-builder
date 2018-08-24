@@ -1,5 +1,6 @@
 # minimal-query-builder
 
+
 A thin and simple query-builder supporting all databases supported by PDO
 with no external requirements. 
 
