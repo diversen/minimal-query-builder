@@ -6,16 +6,16 @@ use diversen\db\q;
 
 // Connect example
 
-// MySQL
+// MySQL connect example
 /*
 $mysql_conn = array(
     'url' => $url, // mysql:dbname=gitbook;host=localhost;charset=utf8
-    'username' => conf::getMainIni('username'), // username
-    'password' => conf::getMainIni('password'), // password
-    'db_init' => conf::getMainIni('db_init') // An init command, e.g. 'SET NAMES utf8'
+    'username' => 'username', // username
+    'password' => 'password', // password
+    'db_init' => 'an init command' // An init command, e.g. 'SET NAMES utf8'
 ); */
 
-// But we test with sqlite in memory
+// Test with sqlite in memory
 $sqlite_url = array('url' => 'sqlite::memory:');
 
 // Connect
@@ -101,6 +101,7 @@ $res = q::insert('account')->values($values)->execLastInsertId();
 if (!$res) {
     echo "Could not insert row. We roll back" . PHP_EOL;
     q::rollback();
+    exit('Roll back');
 }
 
 $res = q::commit();
